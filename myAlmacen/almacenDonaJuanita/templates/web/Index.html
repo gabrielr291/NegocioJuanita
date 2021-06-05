@@ -1,0 +1,31 @@
+{% load static %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+<head>
+
+</head>
+
+<body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <div style="text-align: center;color:black;"><h1>Almacen "Los Yuyitos"</h1>
+    </div>
+    <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'VENTA'%}">Venta</a>
+    <a class="navbar-brand" href="{% url 'PROVEEDOR'%}">Proveedor</a>
+    <a class="navbar-brand" href="{% url 'CLIENTE'%}">Cliente</a>
+    <a class="navbar-brand" href="{% url 'PRODUCTO'%}">Producto</a>
+    <a class="navbar-brand" href="{% url 'LOGIN'%}">Cerrar Sesion</a>
+    </nav>
+</body>
+
+<footer>
+</footer>
+
