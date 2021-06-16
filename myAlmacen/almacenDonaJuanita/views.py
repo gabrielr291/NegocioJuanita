@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Detalleboleta,Cliente,Boleta,Producto,Proveedor
+from .models import Detalleboleta,Cliente,Boleta,Producto,Proveedor,Usuario,Estadopedido,Familiaproducto,Pedido,Rubroproveedor,Tipoproducto
+from django.http import HttpResponse
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login as login_autent
@@ -116,3 +117,24 @@ def eliminar_producto(request,id):
         msg='No Elimino'
     lista = Producto.objects.all()
     return render(request,'web/producto.html',{'listar_producto':lista, 'msg':msg})
+
+
+
+
+
+def agregar_detalleboleta(request):
+    carro = Detalleboleta(request.session)
+    producto = Producto.objects.get(idproducto=request.GET.get('idproducto'))
+    carro.add(producto, precio=producto.precioventa)
+    return HttpResponse("AGREGADO")
+
+
+def eliminar_productocarro(request):
+    carro = Detalleboleta(request.session)
+    producto = Producto.objects.get(idproducto=request.GET.get('idproducto'))
+    carro.remove(producto)
+    return HttpResponse("ELIMINADO")
+
+
+def mostrar_productocarro(request):
+    return render(request, 'web/mostrar-carro.html')
