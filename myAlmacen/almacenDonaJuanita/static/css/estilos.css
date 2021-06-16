@@ -28,6 +28,9 @@ body {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
+#centrar{
+  text-align:center;
+  }
 
 html,
 body {
