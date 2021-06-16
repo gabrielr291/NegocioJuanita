@@ -138,3 +138,6 @@ def eliminar_productocarro(request):
 
 def mostrar_productocarro(request):
     return render(request, 'web/mostrar-carro.html')
+
+def vista_Venta(request):
+    return render(request,'web/vistaventa.html')
