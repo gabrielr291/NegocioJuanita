@@ -28,16 +28,13 @@ body {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
-#centrar{
-  text-align:center;
-  }
-
 html,
 body {
   height: 100%;
   background-color: #152733;
   overflow: hidden;
 }
+
 
 .form-holder {
   display: flex;
@@ -46,6 +43,7 @@ body {
   align-items: center;
   text-align: center;
   min-height: 100vh;
+  width: 100%;
 }
 
 .form-holder .form-content {

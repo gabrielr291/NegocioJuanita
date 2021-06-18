@@ -1,6 +1,7 @@
 {% load static %}
 
 
+
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -27,7 +28,7 @@
                     <div class="form-items">
                         <h3>Venta</h3>
                         <form action="{% url 'VENTA'%}" class="requires-validation" method="POST">
-                            {% csrf_token %}
+                            
                             
                             <div class="col-md-12">
                                <input class="form-control" type="number" name="idVenta" placeholder="Numero de venta" required>

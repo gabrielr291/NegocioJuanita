@@ -1,6 +1,7 @@
 {% load static %}
 
 
+
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -20,13 +21,14 @@
     <a class="navbar-brand" href="{% url 'PRODUCTO'%}">Producto</a>
     <a class="navbar-brand" href="{% url 'LOGIN'%}">Cerrar Sesion</a>
     </nav>
-    <div class="form-holder"id="centrar">
+    <div class="form-body" id="centrar">
         <div class="row">
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
                         <h3>Cliente</h3>
                         <form action="{% url 'CLIENTE'%}" class="requires-validation" method="POST">
+                        
 
                             <div class="col-md-12">
                                <input class="form-control" type="text" name="idCliente" placeholder="ID Cliente" required>

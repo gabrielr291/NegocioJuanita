@@ -1,0 +1,13 @@
+{% load carton_tags %}
+{% get_detalleboleta as Detalleboleta %}
+
+{% for item in Detalleboleta.items %}
+    {{ item.producto.nombreProducto }}
+    {{ item.cantidad }}
+    {{ item.subtotal }}
+{% endfor %}
+
+You can also use this convinent shortcut:
+{% for product in cart.products %}
+    {{ product.name }}
+{% endfor %}
