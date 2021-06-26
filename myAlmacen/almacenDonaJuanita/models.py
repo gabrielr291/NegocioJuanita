@@ -71,7 +71,7 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Boleta(models.Model):
-    idboleta = models.BigIntegerField(primary_key=True)
+    idboleta = models.AutoField(primary_key=True)
     fechaboleta = models.DateField()
     formapago = models.CharField(max_length=10, blank=True, null=True)
 
@@ -81,7 +81,7 @@ class Boleta(models.Model):
 
 
 class Cliente(models.Model):
-    idcliente = models.BigIntegerField(primary_key=True)
+    idcliente = models.AutoField(primary_key=True)
     rutcliente = models.CharField(max_length=20)
     nombrecliente = models.CharField(max_length=50)
     telefonocliente = models.IntegerField()
@@ -93,7 +93,7 @@ class Cliente(models.Model):
         db_table = 'cliente'
 
 class Estadopedido(models.Model):
-    idestado = models.BigIntegerField(primary_key=True)
+    idestado = models.AutoField(primary_key=True)
     descestado=models.BigIntegerField()
     
 
@@ -102,7 +102,7 @@ class Estadopedido(models.Model):
         db_table = 'estadopedido'
 
 class Pedido(models.Model):
-    idpedido = models.BigIntegerField()
+    idpedido = models.AutoField(primary_key=True)
     fechapedido = models.BigIntegerField()
     idestado = models.BigIntegerField()
     idproducto = models.BigIntegerField()
@@ -118,7 +118,7 @@ class Pedido(models.Model):
 
 
 class Detalleboleta(models.Model):
-    idboleta = models.BigIntegerField(primary_key=True)
+    idboleta = models.AutoField(primary_key=True)
     idproducto = models.BigIntegerField()
     cantidadproducto = models.BigIntegerField()
     totalventa = models.BigIntegerField()
@@ -174,7 +174,7 @@ class DjangoSession(models.Model):
 
 
 class Familiaproducto(models.Model):
-    idfamilia = models.BigIntegerField(primary_key=True)
+    idfamilia = models.AutoField(primary_key=True)
     descfamilia = models.CharField(max_length=50)
 
     class Meta:
@@ -183,7 +183,7 @@ class Familiaproducto(models.Model):
 
 
 class Fiado(models.Model):
-    idfiado = models.BigIntegerField(primary_key=True)
+    idfiado = models.AutoField(primary_key=True)
     idcliente = models.BigIntegerField()
     estadofiado = models.CharField(max_length=20)
     totalfiado = models.BigIntegerField()
@@ -194,7 +194,7 @@ class Fiado(models.Model):
 
 
 class Producto(models.Model):
-    idproducto = models.BigIntegerField(primary_key=True)
+    idproducto = models.AutoField(primary_key=True)
     nombreproducto = models.CharField(max_length=50)
     precioventa = models.BigIntegerField(blank=True, null=True)
     stockproducto = models.IntegerField(blank=True, null=True)
@@ -206,7 +206,7 @@ class Producto(models.Model):
 
 
 class Proveedor(models.Model):
-    idproveedor = models.BigIntegerField(primary_key=True)
+    idproveedor = models.AutoField(primary_key=True)
     telefonoproveedor = models.DecimalField(max_digits=10, decimal_places=2)
     correoproveedor = models.CharField(max_length=50)
 
@@ -216,7 +216,7 @@ class Proveedor(models.Model):
 
 
 class Rubroproveedor(models.Model):
-    idrubro = models.BigIntegerField(primary_key=True)
+    idrubro = models.AutoField(primary_key=True)
     descrubro = models.CharField(max_length=50)
 
     class Meta:
@@ -225,7 +225,7 @@ class Rubroproveedor(models.Model):
 
 
 class Tipoproducto(models.Model):
-    idtipo = models.BigIntegerField(primary_key=True)
+    idtipo = models.AutoField(primary_key=True)
     desctipo = models.CharField(max_length=50)
 
     class Meta:
@@ -234,7 +234,7 @@ class Tipoproducto(models.Model):
 
 
 class Usuario(models.Model):
-    idusuario = models.BigIntegerField(primary_key=True)
+    idusuario = models.AutoField(primary_key=True)
     tipousuario = models.CharField(max_length=50)
     nombreusuario = models.CharField(max_length=20)
     contrasenausuario = models.CharField(max_length=50)
