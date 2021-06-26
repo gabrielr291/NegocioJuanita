@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, logout, login as login_autent
 from django.contrib.auth.decorators import login_required,permission_required
 
 
+
 # Create your views here.
 def login (request):
     if request.POST:
@@ -29,32 +30,28 @@ def cliente(request):
 def proveedor(request):
     return render(request,'web/proveedor.html')
 
-@login_required(login_url='/login/')
-def guardar_proveedor(request):
+def modproveedor(request):
+    return render(request,'web/modproveedor.html')
+
+def agregar_proveedor(request):
         if request.POST:
-            idproveedor = request.POST.get("idProveedor")
-            telefonoproveedor = request.POST.get("telefonoProveedor")
-            correoproveedor = request.POST.get("correoProveedor")
+            telefono = request.POST.get("phone")
+            correo = request.POST.get("email")
+            nombre = request.POST.get("txtname")
 
+            if nombre==True:
+                proveedordatos = Proveedor()
+                proveedordatos.telefonoproveedor = telefono
+                proveedordatos.correoproveedor = correo
+                proveedordatos.nombreproveedor = nombre
 
-        proveedor = Proveedor(
-            idproveedor=idproveedor,
-            telefonoproveedor=telefonoproveedor,
-            correoproveedor=correoproveedor,
-        )
-
-        producto.save()
+                Proveedor.save()
+            return render({'msg':'Proveedor guardado'})
         return render (request,'web/proveedor.html')
 
-def eliminar_proveedor(request,id):
-    try:
-        Proveedor = proveedor.objects.get(idproveedor=idproveedor)
-        proveedor.delete()
-        msg='Elimino Proveedor'
-    except:
-        msg='No Elimino'
-    lista = Producto.objects.all()
-    return render(request,'web/proveedor.html',{'listar_proveedor':lista, 'msg':msg})
+def eliminar_proveedor(request):
+
+    return render(request,'web/proveedor.html',{})
 
 
 def venta(request):
@@ -90,22 +87,32 @@ def eliminar_venta(request,id):
 
 def producto(request):
     return render(request,'web/producto.html')
+def modproducto(request):
+    return render(request,'web/modproducto.html')
 @login_required(login_url='/login/')
 def guardar_producto(request):
         if request.POST:
-            idproducto = request.POST.get("idProducto")
-            nombreproducto = request.POST.get("nombreProducto")
-            precioventa = request.POST.get("precioVenta")
-            stockproducto = request.POST.get("stockProducto")
+            nombre = request.POST.get("txtname")
+            desc = request.POST.get("txtdescuento")
+            fechaven = request.POST.get("fechavenci")
+            pcompra = request.POST.get("preciocompra")
+            pventa = request.POST.get("precioventa")
+            stock = request.POST.get("stock")
+            critico = request.POST.get("stockcritico")
 
-        producto = producto(
-            codigo=idproducto,
-            nombreproducto=nombreproducto,
-            precioventa=precioventa,
-            stock=stockproducto
-        )
+            if nombre==True:
+                productosdatos = Producto()
+                productosdatos.nombreproducto = nombre
+                productosdatos.descproducto = desc
+                productosdatos.fechavencimiento = fechaven
+                productosdatos.preciocompra = pcompra
+                productosdatos.precioventa = pventa
+                productosdatos.stockproducto = stock
+                productosdatos.stockcriticoproducto = critico
+                
 
-        producto.save()
+                Producto.save()
+            return render({'msg':'Producto guardado'})
         return render (request,'web/producto.html')
 
 def eliminar_producto(request,id):

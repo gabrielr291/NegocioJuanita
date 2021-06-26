@@ -73,7 +73,8 @@ class AuthUserUserPermissions(models.Model):
 class Boleta(models.Model):
     idboleta = models.BigIntegerField(primary_key=True)
     fechaboleta = models.DateField()
-    formapago = models.CharField(max_length=10, blank=True, null=True)
+    idpago = models.BigIntegerField(blank=True, null=True)
+    idcliente = models.BigIntegerField()
 
     class Meta:
         managed = False
@@ -84,7 +85,7 @@ class Cliente(models.Model):
     idcliente = models.BigIntegerField(primary_key=True)
     rutcliente = models.CharField(max_length=20)
     nombrecliente = models.CharField(max_length=50)
-    telefonocliente = models.IntegerField()
+    telefonocliente = models.BigIntegerField()
     correocliente = models.CharField(max_length=50)
     estadocliente = models.CharField(max_length=50)
 
@@ -92,37 +93,13 @@ class Cliente(models.Model):
         managed = False
         db_table = 'cliente'
 
-class Estadopedido(models.Model):
-    idestado = models.BigIntegerField(primary_key=True)
-    descestado=models.BigIntegerField()
-    
-
-    class Meta:
-        managed = False
-        db_table = 'estadopedido'
-
-class Pedido(models.Model):
-    idpedido = models.BigIntegerField()
-    fechapedido = models.BigIntegerField()
-    idestado = models.BigIntegerField()
-    idproducto = models.BigIntegerField()
-    fechallegada= models.BigIntegerField()
-    idusuario= models.BigIntegerField()
-    totalproducto= models.BigIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'pedido'
-
-
-
 
 class Detalleboleta(models.Model):
-    idboleta = models.BigIntegerField(primary_key=True)
+    idboleta = models.BigIntegerField()
     idproducto = models.BigIntegerField()
     cantidadproducto = models.BigIntegerField()
     totalventa = models.BigIntegerField()
-    valorproducto= models.BigIntegerField()
+    valorproducto = models.BigIntegerField()
 
     class Meta:
         managed = False
@@ -173,42 +150,63 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Estadopedido(models.Model):
+    idestado = models.BigIntegerField(primary_key=True)
+    descestado = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'estadopedido'
+
+
 class Familiaproducto(models.Model):
     idfamilia = models.BigIntegerField(primary_key=True)
-    descfamilia = models.CharField(max_length=50)
+    descfamilia = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'familiaproducto'
 
 
-class Fiado(models.Model):
-    idfiado = models.BigIntegerField(primary_key=True)
-    idcliente = models.BigIntegerField()
-    estadofiado = models.CharField(max_length=20)
-    totalfiado = models.BigIntegerField()
+class Pedido(models.Model):
+    idpedido = models.BigIntegerField(primary_key=True)
+    fechapedido = models.DateField()
+    idestado = models.BigIntegerField()
+    idproducto = models.BigIntegerField()
+    idproveedor = models.BigIntegerField()
+    fechallgegada = models.DateField()
+    idusuario = models.BigIntegerField()
+    totalproducto = models.BigIntegerField()
 
     class Meta:
         managed = False
-        db_table = 'fiado'
+        db_table = 'pedido'
 
 
 class Producto(models.Model):
-    idproducto = models.BigIntegerField(primary_key=True)
-    nombreproducto = models.CharField(max_length=50)
-    precioventa = models.BigIntegerField(blank=True, null=True)
-    stockproducto = models.IntegerField(blank=True, null=True)
-
+    idproducto = models.CharField(primary_key=True, max_length=20)
+    nombreproducto = models.CharField(max_length=50, blank=True, null=True)
+    descproducto = models.CharField(max_length=150, blank=True, null=True)
+    fechavencimiento = models.DateField(blank=True, null=True)
+    preciocompra = models.BigIntegerField()
+    precioventa = models.BigIntegerField()
+    stockproducto = models.BigIntegerField()
+    stockcriticoproducto = models.BigIntegerField()
+    idfamilia = models.BigIntegerField()
+    idtipo = models.BigIntegerField()
 
     class Meta:
         managed = False
         db_table = 'producto'
+        unique_together = (('idproducto', 'idfamilia', 'idtipo'),)
 
 
 class Proveedor(models.Model):
     idproveedor = models.BigIntegerField(primary_key=True)
-    telefonoproveedor = models.DecimalField(max_digits=10, decimal_places=2)
-    correoproveedor = models.CharField(max_length=50)
+    telefonoproveedor = models.BigIntegerField()
+    correoproveedor = models.CharField(max_length=50, blank=True, null=True)
+    idrubro = models.BigIntegerField()
+    nombreproveedor = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -217,11 +215,20 @@ class Proveedor(models.Model):
 
 class Rubroproveedor(models.Model):
     idrubro = models.BigIntegerField(primary_key=True)
-    descrubro = models.CharField(max_length=50)
+    descrubro = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'rubroproveedor'
+
+
+class Tipopago(models.Model):
+    idpago = models.BigIntegerField(primary_key=True)
+    descpago = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tipopago'
 
 
 class Tipoproducto(models.Model):
@@ -238,7 +245,7 @@ class Usuario(models.Model):
     tipousuario = models.CharField(max_length=50)
     nombreusuario = models.CharField(max_length=20)
     contrasenausuario = models.CharField(max_length=50)
-    telefonousuario = models.DecimalField(max_digits=10, decimal_places=2)
+    telefonousuario = models.BigIntegerField()
 
     class Meta:
         managed = False
