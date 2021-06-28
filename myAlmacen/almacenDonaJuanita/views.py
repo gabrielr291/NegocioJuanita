@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Detalleboleta,Cliente,Boleta,Producto,Proveedor,Usuario,Estadopedido,Familiaproducto,Pedido,Rubroproveedor,Tipoproducto
+from .models import *
 from django.http import HttpResponse
 
 from django.contrib.auth.models import User

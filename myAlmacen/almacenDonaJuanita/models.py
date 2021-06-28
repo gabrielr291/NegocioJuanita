@@ -184,7 +184,7 @@ class Pedido(models.Model):
 
 
 class Producto(models.Model):
-    idproducto = models.CharField(primary_key=True, max_length=20)
+    idproducto = models.AutoField(primary_key=True, max_length=20)
     nombreproducto = models.CharField(max_length=50, blank=True, null=True)
     descproducto = models.CharField(max_length=150, blank=True, null=True)
     fechavencimiento = models.DateField(blank=True, null=True)

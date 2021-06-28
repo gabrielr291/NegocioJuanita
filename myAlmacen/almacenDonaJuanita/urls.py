@@ -10,6 +10,6 @@ urlpatterns = [
     path('modproveedor.html',modproveedor,name='MODPROVEEDOR'),
     path('venta.html',venta,name='VENTA'),
     path('producto.html',producto,name='PRODUCTO'),
-    path('modproducto.html',modproducto,name='MOPRODUCTO'),
+    path('modproducto.html',modproducto,name='MODPRODUCTO'),
 
 ]
