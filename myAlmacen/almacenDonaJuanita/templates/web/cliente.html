@@ -1,64 +1,56 @@
-{% load static %}
+{% extends "web/base.html" %}
+{% block masterhead %}
+    <div class="masthead-heading text-uppercase">Administración de Clientes</div>
+    <a class="btn btn-primary btn-xl text-uppercase" href="#contact">Registrar Cliente</a>
+    <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'LISCLIENTES'%}">Modificar Producto</a>
+{% endblock masterhead %}
 
+{% block contenido %}
+<section class="page-section" id="contact">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Administración de Clientes</h2>
+            <h3 class="section-subheading text-muted">Ingrese los datos requeridos para generar el registro</h3>
+        </div>
 
-
-<head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-
-</head>
-
-<body>
-    <div style="text-align: center;color:black;"><h1>Almacen "Los Yuyitos"</h1>
-    </div>
-    <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'VENTA'%}">Venta</a>
-    <a class="navbar-brand" href="{% url 'PROVEEDOR'%}">Proveedor</a>
-    <a class="navbar-brand" href="{% url 'CLIENTE'%}">Cliente</a>
-    <a class="navbar-brand" href="{% url 'PRODUCTO'%}">Producto</a>
-    <a class="navbar-brand" href="{% url 'LOGIN'%}">Cerrar Sesion</a>
-    </nav>
-    <div class="form-body" id="centrar">
-        <div class="row">
-            <div class="form-holder">
-                <div class="form-content">
-                    <div class="form-items">
-                        <h3>Cliente</h3>
-                        <form action="{% url 'CLIENTE'%}" class="requires-validation" method="POST">
-                        
-
-                            <div class="col-md-12">
-                               <input class="form-control" type="text" name="idCliente" placeholder="ID Cliente" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="nombreCliente" placeholder="Nombre CLIENTE" required>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="estadoCliente" placeholder="Estado Cliente" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="contactoCliente" placeholder="Contacto Cliente" required>
-                            </div>
-
-                            <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-success">GUARDAR</button>
-                                <button id="reset" type="reset" class="btn btn-warning">CANCELAR</button>
-                                <button id="button" type="button" class="btn btn-success">LISTAR</button>
-                            </div>
-                        </form>
-                    </div>
+        <form id="contactForm" action="" method="POST">{% csrf_token %}
+            <div class="row align-center mb-5">
+                <div class="form-group">
+                    <!-- Name input-->
+                    <input class="form-control" id="txtnombre" name="txtnombre" type="text" placeholder="Escriba el nombre del Cliente*" data-sb-validations="required" />
+                    <div class="invalid-feedback" >Nombre obligatorio.</div>
+                </div>
+                <div class="form-group">
+                    <!-- Email address input-->
+                    <input class="form-control" id="txtrut" name="txtrut" type="text" placeholder="Escriba el RUT del Cliente" data-sb-validations="required,email" />
+                    <div class="invalid-feedback">Campo obligatorio.</div>
+                    <div class="invalid-feedback">Campo no valido.</div>
+                </div>
+                <div class="form-group">
+                    <!-- Phone number input-->
+                    <input class="form-control" id="txttelefono" name="txttelefono" type="number" placeholder="Escriba el Telefono del Cliente" data-sb-validations="required" />
+                    <div class="invalid-feedback" >Fecha de vencimiento obligatorio.</div>
+                </div>
+                <div class="form-group">
+                    <!-- Phone number input-->
+                    <input class="form-control" id="txtcorreo" name="txtcorreo" type="text" placeholder="Escriba el Correo del Cliente" data-sb-validations="required" />                        <div class="invalid-feedback">Precio de compra obligatorio.</div>
+                </div>
+                <div class="form-group">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Estado de Cliente</option>
+                        <option value="1">Al día</option>
+                        <option value="2">Deudor</option>
+                        <option value="3">Bloqueado</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-success btn-xl text-uppercase " id="submitButton" type="submit">Aceptar</button>
+                    <button class="btn btn-danger btn-xl text-uppercase " id="clearButton" type="reset">Borrar</button>
                 </div>
             </div>
-        </div>
+        </form>
+            <div class="masthead-subheading">{{msg}}</div>
     </div>
+</section>
 
-</body>
-
-<footer>
-</footer>
+{% endblock contenido %}

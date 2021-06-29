@@ -1,0 +1,37 @@
+{% extends "web/base.html" %}
+{% block masterhead %}
+    <div class="masthead-heading text-uppercase">Administración de Clientes</div>
+    <a class="btn btn-primary btn-xl text-uppercase" href="#contact">Registrar Cliente</a>
+    <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'MODPRODUCTO'%}">Modificar Producto</a>
+{% endblock masterhead %}
+
+{% block contenido %}
+    <h2>Listado de Clientes</h2>
+    <table>
+        <tr>
+            <th>nombre</th>
+            <th>RUT</th>
+            <th>correo</th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+        {% for a in cliente %}
+        <tr>
+            <td>{{a.nombrecliente}}</td>
+            <td>{{a.rutcliente}}</td>
+            <td>{{a.correocliente}}</td>
+            <td>{{a.telefonocliente}}</td>
+            <td>{{a.estadocliente}}</td>
+            <td>
+                <a href="{% url 'ELIMINARCLIENTE' a.idcliente %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+        {% if messages %}
+            {% for m in messages %}
+            <div>{{ m }}</div>
+            {% endfor %}
+        {% endif %}
+{% endblock contenido %}
